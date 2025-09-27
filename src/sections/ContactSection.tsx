@@ -1,21 +1,15 @@
 import React from "react";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import princimg from '../assets/imgs/princi.jpg';
+
 const ContactSection: React.FC = () => {
   return (
     <section className="w-full bg-gray-100 py-12 px-6 md:px-16 lg:px-24">
       <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* Left: Contact Info, Form, Map */}
+        {/* Left: Form + Map */}
         <div className="space-y-6">
-          {/* Info          <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h3 className="text-xl font-semibold mb-4">Get in Touch</h3>
-            <p className="mb-2">📍 44,Gandhi Street,Nehru Nagar,Amristar,India</p>
-            <p className="mb-2">📞 +91 93421 93945</p>
-            <p className="mb-2">📧 contact@example.com</p>
-          </div>
-            */}
- 
           {/* Form */}
           <form className="bg-white p-6 rounded-2xl shadow-md space-y-4">
             <h3 className="text-xl font-semibold mb-4">Send us a Message</h3>
@@ -63,13 +57,34 @@ const ContactSection: React.FC = () => {
             ></iframe>
           </div>
         </div>
-        {/* Right: Image */}
-        <div className="  flex items-center justify-center">
+
+        {/* Right: Image + Contact Info */}
+        <div className="flex flex-col items-center space-y-6">
           <img
             src={princimg}
             alt="Director"
             className="rounded-2xl shadow-md object-cover w-full max-w-lg"
           />
+
+          {/* Contact Details */}
+          <div className="bg-white p-6 rounded-2xl shadow-md w-full max-w-lg space-y-4">
+            <h3 className="text-xl font-semibold mb-4 text-center">Get in Touch</h3>
+            
+            <div className="flex items-center space-x-3">
+              <FaMapMarkerAlt className="text-blue-600 text-xl" />
+              <p>44, Gandhi Street, Nehru Nagar, Amritsar, India</p>
+            </div>
+            
+            <div className="flex items-center space-x-3">
+              <FaPhoneAlt className="text-blue-600 text-xl" />
+              <p>+91 93421 93945</p>
+            </div>
+            
+            <div className="flex items-center space-x-3">
+              <FaEnvelope className="text-blue-600 text-xl" />
+              <p>contact@example.com</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -77,3 +92,4 @@ const ContactSection: React.FC = () => {
 };
 
 export default ContactSection;
+
