@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Icon from '@mui/material/Icon';
 // Example: import { HeroHighlight, FocusCard, Timeline, ScrollStack } from 'acentricity-ai'; // Placeholder imports
 // import { ScrollStack } from 'react-bits'; // Placeholder import
-import 'D:\\College Studies\\Work\\SIF-FLAB\\src\\styles\\AboutPage.css'; // Create this for custom styles
+//import 'D:\\College Studies\\Work\\SIF-FLAB\\src\\styles\\AboutPage.css'; // Create this for custom styles
 
 const AboutPage: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
