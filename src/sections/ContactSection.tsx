@@ -1,5 +1,5 @@
 import React from "react";
-
+import princimg from '../assets/imgs/princi.jpg';
 const ContactSection: React.FC = () => {
   return (
     <section className="w-full bg-gray-100 py-12 px-6 md:px-16 lg:px-24">
@@ -64,11 +64,11 @@ const ContactSection: React.FC = () => {
           </div>
         </div>
         {/* Right: Image */}
-        <div className="flex items-center justify-center">
+        <div className="  flex items-center justify-center">
           <img
-            src="./assets/imgs/princi.jpg"
+            src={princimg}
             alt="Director"
-            className="rounded-2xl shadow-md object-cover w-full max-w-xs"
+            className="rounded-2xl shadow-md object-cover w-full max-w-lg"
           />
         </div>
       </div>
