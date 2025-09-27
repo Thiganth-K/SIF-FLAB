@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import princimg from '../assets/imgs/princi.jpg';
-
+import { FaCheck } from "react-icons/fa";
 const ContactSection: React.FC = () => {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+
+    // Reset form state after animation
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 3000);
+  };
   return (
     <section className="w-full bg-gray-100 py-12 px-6 md:px-16 lg:px-24">
       <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
@@ -11,37 +22,82 @@ const ContactSection: React.FC = () => {
         {/* Left: Form + Map */}
         <div className="space-y-6">
           {/* Form */}
-          <form className="bg-white p-6 rounded-2xl shadow-md space-y-4">
-            <h3 className="text-xl font-semibold mb-4">Send us a Message</h3>
-            
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-            
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-            
-            <textarea
-              placeholder="Your Message"
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              rows={4}
-              required
-            ></textarea>
-            
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition"
-            >
-              Send Message
-            </button>
-          </form>
+          <form
+      onSubmit={handleSubmit}
+      className="bg-white p-8 rounded-2xl shadow-lg space-y-6 border border-blue-100"
+    >
+      <h3 className="text-2xl font-bold mb-6 text-center text-blue-700">
+        Send us a Message
+      </h3>
+
+      {/* Name */}
+      <div className="space-y-2">
+        <label
+          htmlFor="name"
+          className="block text-sm font-semibold text-gray-700"
+        >
+          Your Name
+        </label>
+        <input
+          type="text"
+          id="name"
+          required
+          className="w-full px-4 py-3 border rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {/* Email */}
+      <div className="space-y-2">
+        <label
+          htmlFor="email"
+          className="block text-sm font-semibold text-gray-700"
+        >
+          Your Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          required
+          className="w-full px-4 py-3 border rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        />
+      </div>
+
+      {/* Message */}
+      <div className="space-y-2">
+        <label
+          htmlFor="message"
+          className="block text-sm font-semibold text-gray-700"
+        >
+          Your Message
+        </label>
+        <textarea
+          id="message"
+          rows={4}
+          required
+          className="w-full px-4 py-3 border rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={submitted}
+        className={`relative w-full py-3 rounded-lg font-semibold transition-all duration-500 flex items-center justify-center
+        ${
+          submitted
+            ? "bg-green-500 text-white"
+            : "bg-gradient-to-r from-blue-600 to-yellow-500 text-white hover:shadow-lg hover:scale-[1.02]"
+        }`}
+      >
+        {submitted ? (
+          <span className="flex items-center space-x-2 animate-bounce">
+            <FaCheck /> <span>Submitted</span>
+          </span>
+        ) : (
+          "Send Message"
+        )}
+      </button>
+    </form>
 
           {/* Embedded Google Map */}
           <div>
