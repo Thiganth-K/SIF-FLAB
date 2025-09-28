@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { FaSun, FaMoon, FaEye, FaFlag, FaHistory, FaCogs, FaThumbsUp, FaFlask, FaCalendarAlt, FaLaptop, FaQuoteLeft, FaUsers, FaAward, FaClock } from 'react-icons/fa';
+import React from 'react';
+import { FaEye, FaFlag, FaHistory, FaCogs, FaThumbsUp, FaFlask, FaCalendarAlt, FaLaptop, FaQuoteLeft, FaUsers, FaAward, FaClock } from 'react-icons/fa';
 
-const AboutPage: React.FC = () => {
-  const [darkMode, setDarkMode] = useState(false);
+interface AboutPageProps {
+  darkMode?: boolean;
+}
+
+const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
 
   const services = [
     { 
@@ -59,24 +62,6 @@ const AboutPage: React.FC = () => {
         ? 'bg-gradient-to-br from-slate-900 to-slate-800 text-gray-50' 
         : 'bg-gradient-to-br from-gray-50 to-blue-50 text-gray-900'
     }`}>
-      
-      {/* Theme Toggle */}
-      <div className="absolute top-8 right-8 z-50">
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
-            darkMode 
-              ? 'bg-slate-800 border-2 border-blue-400 hover:shadow-lg hover:shadow-blue-400/25' 
-              : 'bg-white border-2 border-blue-600 hover:shadow-lg hover:shadow-blue-600/25'
-          }`}
-        >
-          {darkMode ? (
-            <FaSun className="text-xl text-yellow-400" />
-          ) : (
-            <FaMoon className="text-xl text-blue-600" />
-          )}
-        </button>
-      </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16">
         

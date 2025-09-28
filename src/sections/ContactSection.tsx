@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import contactImg from "../assets/imgs/sce.jpeg";
 
-const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  darkMode?: boolean;
+}
+
+const ContactSection: React.FC<ContactSectionProps> = ({ darkMode = false }) => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -12,7 +16,9 @@ const ContactSection: React.FC = () => {
   };
 
   return (
-    <section className="w-full bg-gray-100 py-12 px-4 md:px-8 lg:px-16">
+    <section className={`w-full py-12 px-4 md:px-8 lg:px-16 transition-colors duration-300 ${
+      darkMode ? 'bg-slate-900' : 'bg-gray-100'
+    }`}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Side: Form Card */}
         <div className="bg-white p-8 rounded-2xl shadow-lg border border-blue-100 space-y-6 flex flex-col justify-between">

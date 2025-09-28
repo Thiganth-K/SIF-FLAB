@@ -18,7 +18,11 @@ interface CartItem {
   quantity: number;
 }
 
-const SlotBookingSection: React.FC = () => {
+interface SlotBookingSectionProps {
+  darkMode?: boolean;
+}
+
+const SlotBookingSection: React.FC<SlotBookingSectionProps> = ({ darkMode = false }) => {
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
@@ -128,7 +132,9 @@ const SlotBookingSection: React.FC = () => {
   const getTotalItems = () => cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <section className="w-full bg-slate-50 py-16 px-4 md:px-8 lg:px-16">
+    <section className={`w-full py-16 px-4 md:px-8 lg:px-16 transition-colors duration-300 ${
+      darkMode ? 'bg-slate-900' : 'bg-slate-50'
+    }`}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

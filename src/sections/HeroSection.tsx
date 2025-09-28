@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { FaSun, FaMoon } from 'react-icons/fa';
 import SplitText from '../components/SplitText/SplitText';
 
-const HeroSection: React.FC = () => {
-  const [darkMode, setDarkMode] = useState(false);
+interface HeroSectionProps {
+  darkMode?: boolean;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -14,10 +16,6 @@ const HeroSection: React.FC = () => {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
 
   return (
     <section className={`relative min-h-screen font-inter overflow-hidden transition-all duration-300 ${
@@ -182,105 +180,8 @@ const HeroSection: React.FC = () => {
         }}
       />
 
-      {/* Header with Navigation and Dark Mode Toggle */}
-      <header className="relative z-30 p-4 lg:p-8">
-        <div className="flex justify-between items-center max-w-6xl mx-auto">
-          {/* Logo */}
-          <div className={`flex items-center gap-2 font-bold text-xl lg:text-2xl ${
-            darkMode ? 'text-blue-400' : 'text-blue-600'
-          }`}>
-            <span className="material-icons text-2xl lg:text-4xl">science</span>
-            <span>SIF-FLAB</span>
-          </div>
-
-          {/* Navigation Menu */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a 
-              href="#home" 
-              className={`relative font-semibold text-base lg:text-lg transition-all duration-300 hover:scale-105 ${
-                darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
-              }`}
-            >
-              <span className="flex items-center gap-1">
-                <span className="material-icons text-sm">home</span>
-                Home
-              </span>
-              <span className={`absolute -bottom-1 left-0 w-full h-0.5 ${
-                darkMode ? 'bg-blue-400' : 'bg-blue-600'
-              } transform scale-x-100 transition-transform duration-300`}></span>
-            </a>
-            
-            <a 
-              href="#about" 
-              className={`font-semibold text-base lg:text-lg transition-all duration-300 hover:scale-105 relative group ${
-                darkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'
-              }`}
-            >
-              <span className="flex items-center gap-1">
-                <span className="material-icons text-sm">info</span>
-                About
-              </span>
-              <span className={`absolute -bottom-1 left-0 w-full h-0.5 ${
-                darkMode ? 'bg-blue-400' : 'bg-blue-600'
-              } transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}></span>
-            </a>
-            
-            <a 
-              href="#contact" 
-              className={`font-semibold text-base lg:text-lg transition-all duration-300 hover:scale-105 relative group ${
-                darkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'
-              }`}
-            >
-              <span className="flex items-center gap-1">
-                <span className="material-icons text-sm">contact_mail</span>
-                Contact Us
-              </span>
-              <span className={`absolute -bottom-1 left-0 w-full h-0.5 ${
-                darkMode ? 'bg-blue-400' : 'bg-blue-600'
-              } transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}></span>
-            </a>
-          </nav>
-
-          {/* Mobile Menu Button & Dark Mode Toggle */}
-          <div className="flex items-center gap-3">
-            {/* Mobile Menu Button */}
-            <button className={`md:hidden w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
-              darkMode 
-                ? 'bg-slate-800/90 border border-blue-400 hover:shadow-blue-400/50' 
-                : 'bg-white/90 border border-blue-600 hover:shadow-blue-600/50'
-            } backdrop-blur-sm shadow-lg hover:shadow-xl`}>
-              <span className={`material-icons text-lg ${
-                darkMode ? 'text-blue-400' : 'text-blue-600'
-              }`}>
-                menu
-              </span>
-            </button>
-
-            {/* Dark Mode Toggle */}
-            <button 
-              className={`w-12 h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 border-2 ${
-                darkMode 
-                  ? 'bg-slate-800/90 border-blue-400 hover:shadow-blue-400/50' 
-                  : 'bg-white/90 border-blue-600 hover:shadow-blue-600/50'
-              } backdrop-blur-sm shadow-xl hover:shadow-2xl`}
-              onClick={toggleDarkMode}
-            >
-              {darkMode ? (
-                <FaSun className={`text-xl lg:text-2xl ${
-                  darkMode ? 'text-yellow-400' : 'text-blue-600'
-                }`} />
-              ) : (
-                <FaMoon className={`text-xl lg:text-2xl ${
-                  darkMode ? 'text-blue-400' : 'text-blue-600'
-                }`} />
-              )}
-            </button>
-          </div>
-        </div>
-      </header>
-
       {/* Main Hero Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 max-w-6xl mx-auto px-4 lg:px-8 py-8 lg:py-16 items-center relative z-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 max-w-6xl mx-auto px-4 lg:px-8 py-20 lg:py-32 items-center relative z-20 mt-16">{/* Added mt-16 for navbar space */}
         {/* Left Content */}
         <div className="flex flex-col space-y-6 lg:space-y-8 text-center lg:text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight space-y-2">
@@ -289,13 +190,11 @@ const HeroSection: React.FC = () => {
                 text="Seamless Lab" 
                 className="inline-block mr-3"
                 delay={200}
-                staggerDelay={0.06}
               />
               <SplitText 
                 text="Slot Booking" 
                 className={`inline-block ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}
                 delay={800}
-                staggerDelay={0.08}
               />
             </div>
             <div className="block mt-2">
@@ -303,14 +202,11 @@ const HeroSection: React.FC = () => {
                 text="Made" 
                 className="inline-block mr-3"
                 delay={1400}
-                staggerDelay={0.05}
               />
               <SplitText 
                 text="Simple" 
                 className={`inline-block ${darkMode ? 'text-yellow-300' : 'text-yellow-500'} drop-shadow-lg`}
-                style={{textShadow: darkMode ? '0 0 10px rgba(253, 224, 71, 0.5)' : '0 0 10px rgba(252, 211, 77, 0.5)'}}
                 delay={1800}
-                staggerDelay={0.1}
               />
             </div>
           </h1>

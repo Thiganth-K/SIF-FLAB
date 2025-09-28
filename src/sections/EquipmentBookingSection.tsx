@@ -35,7 +35,11 @@ interface CartItem {
   quantity: number;
 }
 
-const EquipmentBookingSection: React.FC = () => {
+interface EquipmentBookingSectionProps {
+  darkMode?: boolean;
+}
+
+const EquipmentBookingSection: React.FC<EquipmentBookingSectionProps> = ({ darkMode = false }) => {
   const [selectedEquipment, setSelectedEquipment] = useState<Equipment | null>(null);
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
@@ -223,7 +227,9 @@ const EquipmentBookingSection: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="w-full bg-white py-16 px-4 md:px-8 lg:px-16">
+    <section ref={sectionRef} className={`w-full py-16 px-4 md:px-8 lg:px-16 transition-colors duration-300 ${
+      darkMode ? 'bg-slate-800' : 'bg-white'
+    }`}>
       <div className="max-w-7xl mx-auto">
         {/* Animated Header */}
         <div 
@@ -249,7 +255,7 @@ const EquipmentBookingSection: React.FC = () => {
           {equipment.map((item, index) => (
             <div
               key={item.id}
-              ref={(el) => (cardRefs.current[index] = el)}
+              ref={(el) => { cardRefs.current[index] = el; }}
               data-index={index}
               onClick={() => handleEquipmentClick(item)}
               className={`bg-white rounded-2xl shadow-lg hover:shadow-2xl transform transition-all duration-700 cursor-pointer overflow-hidden border border-blue-100 hover:border-blue-300 group ${
@@ -340,8 +346,8 @@ const EquipmentBookingSection: React.FC = () => {
 
       {/* Booking Form Modal with Animation */}
       {showBookingForm && selectedEquipment && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fadeIn">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform animate-slideInUp">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-pulse">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300 animate-bounce">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-bold text-blue-800">Book {selectedEquipment.name}</h3>
               <button
@@ -436,8 +442,8 @@ const EquipmentBookingSection: React.FC = () => {
 
       {/* Cart Modal with Animation */}
       {showCart && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fadeIn">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden shadow-2xl transform animate-slideInUp">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-pulse">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden shadow-2xl transform transition-all duration-300">
             <div className="p-6 border-b border-gray-200">
               <div className="flex justify-between items-center">
                 <h3 className="text-2xl font-bold text-blue-800">
@@ -462,7 +468,7 @@ const EquipmentBookingSection: React.FC = () => {
               ) : (
                 <div className="space-y-4">
                   {cart.map((item, index) => (
-                    <div key={index} className="bg-gray-50 rounded-xl p-4 border border-gray-200 transform hover:scale-102 transition-all duration-200">
+                    <div key={index} className="bg-gray-50 rounded-xl p-4 border border-gray-200 transform hover:scale-105 transition-all duration-200">
                       <div className="flex justify-between items-start mb-2">
                         <h4 className="text-lg font-semibold text-blue-800">{item.equipmentName}</h4>
                         <button
@@ -533,35 +539,6 @@ const EquipmentBookingSection: React.FC = () => {
         </div>
       )}
 
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
-
-        .animate-slideInUp {
-          animation: slideInUp 0.4s ease-out;
-        }
-
-        .hover\\:scale-102:hover {
-          transform: scale(1.02);
-        }
-      `}</style>
     </section>
   );
 };
