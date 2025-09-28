@@ -1,4 +1,4 @@
-import './App.css';
+
 import HeroSection from './sections/HeroSection';
 import AboutPage from './sections/AboutPage';
 
