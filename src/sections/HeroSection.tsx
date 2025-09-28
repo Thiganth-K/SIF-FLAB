@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaSun, FaMoon } from 'react-icons/fa';
 import SplitText from '../components/SplitText/SplitText';
 
 const HeroSection: React.FC = () => {
@@ -264,11 +265,15 @@ const HeroSection: React.FC = () => {
               } backdrop-blur-sm shadow-xl hover:shadow-2xl`}
               onClick={toggleDarkMode}
             >
-              <span className={`material-icons text-xl lg:text-2xl ${
-                darkMode ? 'text-blue-400' : 'text-blue-600'
-              }`}>
-                {darkMode ? 'light_mode' : 'dark_mode'}
-              </span>
+              {darkMode ? (
+                <FaSun className={`text-xl lg:text-2xl ${
+                  darkMode ? 'text-yellow-400' : 'text-blue-600'
+                }`} />
+              ) : (
+                <FaMoon className={`text-xl lg:text-2xl ${
+                  darkMode ? 'text-blue-400' : 'text-blue-600'
+                }`} />
+              )}
             </button>
           </div>
         </div>
