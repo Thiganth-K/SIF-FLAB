@@ -7,6 +7,7 @@ import AboutPage from './sections/AboutPage';
 import SlotBookingSection from './sections/SlotBookingSection';
 import EquipmentBookingSection from './sections/EquipmentBookingSection';
 import ContactSection from './sections/ContactSection';
+import ServicesSection from './sections/ServicesSection';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -29,6 +30,9 @@ function App() {
       </div>
       <div id="equipment">
         <EquipmentBookingSection darkMode={darkMode} />
+      </div>
+      <div id="services">
+        <ServicesSection darkMode={darkMode} />
       </div>
       <div id="contact">
         <ContactSection darkMode={darkMode} />
