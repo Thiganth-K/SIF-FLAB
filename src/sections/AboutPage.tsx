@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaEye, FaFlag, FaHistory, FaCogs, FaThumbsUp, FaFlask, FaCalendarAlt, FaLaptop, FaQuoteLeft, FaUsers, FaAward, FaClock } from 'react-icons/fa';
+import { FaCogs, FaThumbsUp, FaFlask, FaLaptop, FaQuoteLeft, FaClock, FaBuilding, FaIndustry, FaRocket, FaLightbulb, FaSeedling, FaCubes, FaUsers, FaAward } from 'react-icons/fa';
 
 interface AboutPageProps {
   darkMode?: boolean;
@@ -25,24 +25,6 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
     }
   ];
 
-  const timeline = [
-    { 
-      year: '2020', 
-      title: 'System Launch', 
-      desc: 'Launched SIF-FLAB with basic lab booking capabilities, serving 5 laboratories and 200+ students across engineering departments.' 
-    },
-    { 
-      year: '2021', 
-      title: 'Equipment Integration', 
-      desc: 'Expanded platform to include specialized equipment booking with inventory management and usage analytics for research optimization.' 
-    },
-    { 
-      year: '2022', 
-      title: 'Smart Analytics', 
-      desc: 'Introduced AI-powered scheduling optimization, predictive maintenance alerts, and comprehensive usage reporting for institutional planning.' 
-    }
-  ];
-
   const testimonials = [
     { 
       name: 'Dr. Priya Sharma', 
@@ -52,7 +34,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
     { 
       name: 'Prof. Rajesh Kumar', 
       role: 'Chemistry Department', 
-      quote: 'The equipment booking feature has streamlined our research workflow. Students can now easily access specialized instruments when needed.' 
+      quote: 'The Fab Lab equipment booking feature has streamlined our research workflow. Students can now easily access specialized instruments when needed.' 
     }
   ];
 
@@ -65,144 +47,164 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16">
         
-        {/* Vision Section */}
+        {/* About SIF Section */}
         <div className="mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="flex items-center space-x-3 mb-6">
                 <div className={`p-3 rounded-xl ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                  <FaEye className={`text-2xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
+                  <FaBuilding className={`text-2xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
                 </div>
                 <h2 className={`text-4xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                  Our Vision
+                  About SIF
                 </h2>
               </div>
-              <p className={`text-xl leading-relaxed font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                To transform laboratory management through intelligent booking systems, making research facilities 
-                accessible, efficient, and optimized for academic excellence and scientific innovation.
-              </p>
+              <div className={`text-xl leading-relaxed font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'} space-y-4`}>
+                <p>
+                  <span className="font-bold text-blue-600">Sona Incubation Foundation (SIF)</span> has been established as a Section 8 company non-profit organization funded by <span className="font-semibold">DST-NIDHI & Facilitating Startup India Seed Fund</span>.
+                </p>
+                <p>
+                  SIF acts as a <span className="font-bold text-yellow-600">"One-Stop Shop – Business Incubator"</span> for innovators and start-ups, encouraging and facilitating an entrepreneurial and innovative ecosystem for all stakeholders, including innovators, student community, faculty, and society at large.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800'}`}>
+                  DST-NIDHI Funded
+                </span>
+                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-green-600 text-white' : 'bg-green-100 text-green-800'}`}>
+                  Startup India Seed Fund
+                </span>
+                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-yellow-600 text-white' : 'bg-yellow-100 text-yellow-800'}`}>
+                  Section 8 Non-Profit
+                </span>
+              </div>
               <button className={`inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
                 darkMode 
                   ? 'bg-blue-600 hover:bg-blue-500 text-white hover:shadow-blue-500/25' 
                   : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-600/25'
               }`}>
-                Explore Platform
+                <FaRocket className="mr-2" />
+                Explore Incubation
               </button>
             </div>
-            <div className={`relative p-8 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-              <div className="text-center">
-                <div className={`inline-flex p-6 rounded-full mb-4 ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                  <FaCalendarAlt className={`text-5xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
-                </div>
-                <h3 className={`text-2xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                  Smart Scheduling
-                </h3>
-                <p className={`mt-4 text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  Intelligent lab and equipment booking system
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mission Section */}
-        <div className="mb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-              <div className="text-center">
-                <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-yellow-600' : 'bg-yellow-100'}`}>
-                  <FaUsers className={`text-3xl ${darkMode ? 'text-white' : 'text-yellow-600'}`} />
-                </div>
-                <h4 className={`text-xl font-bold ${darkMode ? 'text-yellow-400' : 'text-yellow-600'}`}>
-                  10,000+ Users
-                </h4>
-                <p className={`text-sm mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  Students & Researchers
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-6 text-center lg:text-left">
-              <div className="flex items-center justify-center lg:justify-start space-x-3 mb-6">
-                <div className={`p-3 rounded-xl ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                  <FaFlag className={`text-2xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
-                </div>
-                <h2 className={`text-4xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                  Our Mission
-                </h2>
-              </div>
-              <p className={`text-xl leading-relaxed font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                Empowering educational institutions with seamless laboratory resource management, 
-                reducing scheduling conflicts, and maximizing research productivity through innovative technology.
-              </p>
-              <button className={`inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
-                darkMode 
-                  ? 'bg-blue-600 hover:bg-blue-500 text-white hover:shadow-blue-500/25' 
-                  : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-600/25'
-              }`}>
-                Book Now
-              </button>
-            </div>
-
-            <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-              <div className="text-center">
-                <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
-                  <FaAward className={`text-3xl ${darkMode ? 'text-white' : 'text-green-600'}`} />
-                </div>
-                <h4 className={`text-xl font-bold ${darkMode ? 'text-green-400' : 'text-green-600'}`}>
-                  99.9% Uptime
-                </h4>
-                <p className={`text-sm mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  System Reliability
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* History Section */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className={`p-3 rounded-xl ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                <FaHistory className={`text-2xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
-              </div>
-              <h2 className={`text-4xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                Our Journey
-              </h2>
-            </div>
-            <p className={`text-xl ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              From a simple booking system to a comprehensive laboratory management platform
-            </p>
-          </div>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className={`absolute left-1/2 transform -translate-x-1/2 w-1 h-full ${darkMode ? 'bg-blue-600' : 'bg-blue-300'} hidden lg:block`}></div>
-            
-            <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <div key={index} className={`flex flex-col lg:flex-row items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8`}>
-                  <div className="flex-1">
-                    <div className={`p-8 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-                      <div className={`inline-block px-4 py-2 rounded-full text-sm font-bold mb-4 ${darkMode ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800'}`}>
-                        {item.year}
-                      </div>
-                      <h3 className={`text-2xl font-bold mb-3 ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                        {item.title}
-                      </h3>
-                      <p className={`text-lg leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                        {item.desc}
-                      </p>
-                    </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
+                <div className="text-center">
+                  <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
+                    <FaSeedling className={`text-3xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
                   </div>
-                  
-                  {/* Timeline Node */}
-                  <div className={`w-4 h-4 rounded-full ${darkMode ? 'bg-blue-600' : 'bg-blue-300'} border-4 ${darkMode ? 'border-slate-900' : 'border-white'} hidden lg:block`}></div>
-                  
-                  <div className="flex-1 lg:block hidden"></div>
+                  <h3 className={`text-lg font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
+                    Startup Incubation
+                  </h3>
                 </div>
-              ))}
+              </div>
+              <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
+                <div className="text-center">
+                  <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
+                    <FaLightbulb className={`text-3xl ${darkMode ? 'text-white' : 'text-green-600'}`} />
+                  </div>
+                  <h3 className={`text-lg font-bold ${darkMode ? 'text-green-400' : 'text-green-800'}`}>
+                    Innovation Hub
+                  </h3>
+                </div>
+              </div>
+              <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
+                <div className="text-center">
+                  <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-yellow-600' : 'bg-yellow-100'}`}>
+                    <FaUsers className={`text-3xl ${darkMode ? 'text-white' : 'text-yellow-600'}`} />
+                  </div>
+                  <h3 className={`text-lg font-bold ${darkMode ? 'text-yellow-400' : 'text-yellow-800'}`}>
+                    Community Ecosystem
+                  </h3>
+                </div>
+              </div>
+              <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
+                <div className="text-center">
+                  <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-purple-600' : 'bg-purple-100'}`}>
+                    <FaAward className={`text-3xl ${darkMode ? 'text-white' : 'text-purple-600'}`} />
+                  </div>
+                  <h3 className={`text-lg font-bold ${darkMode ? 'text-purple-400' : 'text-purple-800'}`}>
+                    Government Support
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* About Fab Lab Section */}
+        <div className="mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className={`relative p-8 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 order-2 lg:order-1`}>
+              <div className="text-center">
+                <div className={`inline-flex p-6 rounded-full mb-6 ${darkMode ? 'bg-gradient-to-br from-blue-600 to-purple-600' : 'bg-gradient-to-br from-blue-100 to-purple-100'}`}>
+                  <FaCubes className={`text-5xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
+                </div>
+                <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
+                  Advanced Prototyping
+                </h3>
+                <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  State-of-the-art tools for rapid prototyping and product development
+                </p>
+                <div className="grid grid-cols-2 gap-4 mt-6">
+                  <div className={`p-3 rounded-lg ${darkMode ? 'bg-slate-700' : 'bg-gray-100'}`}>
+                    <span className={`text-sm font-semibold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>3D Printing</span>
+                  </div>
+                  <div className={`p-3 rounded-lg ${darkMode ? 'bg-slate-700' : 'bg-gray-100'}`}>
+                    <span className={`text-sm font-semibold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>CNC Machines</span>
+                  </div>
+                  <div className={`p-3 rounded-lg ${darkMode ? 'bg-slate-700' : 'bg-gray-100'}`}>
+                    <span className={`text-sm font-semibold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>Electronics Lab</span>
+                  </div>
+                  <div className={`p-3 rounded-lg ${darkMode ? 'bg-slate-700' : 'bg-gray-100'}`}>
+                    <span className={`text-sm font-semibold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>Testing Equipment</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-6 order-1 lg:order-2">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className={`p-3 rounded-xl ${darkMode ? 'bg-purple-600' : 'bg-purple-100'}`}>
+                  <FaIndustry className={`text-2xl ${darkMode ? 'text-white' : 'text-purple-600'}`} />
+                </div>
+                <h2 className={`text-4xl font-bold ${darkMode ? 'text-purple-400' : 'text-purple-800'}`}>
+                  About Fab Lab
+                </h2>
+              </div>
+              <div className={`text-xl leading-relaxed font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'} space-y-4`}>
+                <p>
+                  <span className="font-bold text-purple-600">Sona Incubation's Fab Lab</span> is a state-of-the-art innovation space that supports innovators and startups, including early-stage ventures, in turning ideas into reality.
+                </p>
+                <p>
+                  Equipped with <span className="font-semibold">advanced tools and expert guidance</span>, the Fab Lab enables rapid prototyping, product development, and testing. It provides a collaborative environment where entrepreneurs can validate concepts, reduce risks, and accelerate their journey from idea to market.
+                </p>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-2 h-2 rounded-full ${darkMode ? 'bg-purple-400' : 'bg-purple-600'}`}></div>
+                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} font-medium`}>Rapid prototyping and testing facilities</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className={`w-2 h-2 rounded-full ${darkMode ? 'bg-purple-400' : 'bg-purple-600'}`}></div>
+                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} font-medium`}>Expert guidance and mentorship support</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className={`w-2 h-2 rounded-full ${darkMode ? 'bg-purple-400' : 'bg-purple-600'}`}></div>
+                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} font-medium`}>Collaborative innovation ecosystem</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className={`w-2 h-2 rounded-full ${darkMode ? 'bg-purple-400' : 'bg-purple-600'}`}></div>
+                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} font-medium`}>Concept validation and risk reduction</span>
+                </div>
+              </div>
+              <button className={`inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
+                darkMode 
+                  ? 'bg-purple-600 hover:bg-purple-500 text-white hover:shadow-purple-500/25' 
+                  : 'bg-purple-600 hover:bg-purple-700 text-white hover:shadow-purple-600/25'
+              }`}>
+                <FaCubes className="mr-2" />
+                Book Fab Lab
+              </button>
             </div>
           </div>
         </div>
