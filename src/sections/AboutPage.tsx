@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCogs, FaThumbsUp, FaFlask, FaLaptop, FaQuoteLeft, FaClock, FaBuilding, FaIndustry, FaRocket, FaLightbulb, FaSeedling, FaCubes, FaUsers, FaAward } from 'react-icons/fa';
+import { FaCogs, FaFlask, FaLaptop, FaClock, FaBuilding, FaIndustry, FaRocket, FaLightbulb, FaSeedling, FaCubes, FaUsers, FaAward } from 'react-icons/fa';
 
 interface AboutPageProps {
   darkMode?: boolean;
@@ -22,19 +22,6 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
       icon: <FaClock className="text-4xl" />, 
       title: 'Real-time Management', 
       desc: 'Live monitoring and management of bookings with automated notifications and scheduling conflicts resolution.' 
-    }
-  ];
-
-  const testimonials = [
-    { 
-      name: 'Dr. Priya Sharma', 
-      role: 'Head of Research Department', 
-      quote: 'SIF-FLAB has revolutionized how we manage our laboratory resources. The booking system is intuitive and has eliminated scheduling conflicts entirely.' 
-    },
-    { 
-      name: 'Prof. Rajesh Kumar', 
-      role: 'Chemistry Department', 
-      quote: 'The Fab Lab equipment booking feature has streamlined our research workflow. Students can now easily access specialized instruments when needed.' 
     }
   ];
 
@@ -271,52 +258,6 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
             </div>
           </div>
         </div>
-
-        {/* Testimonials Section */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className={`p-3 rounded-xl ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                <FaThumbsUp className={`text-2xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
-              </div>
-              <h2 className={`text-4xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                Success Stories
-              </h2>
-            </div>
-            <p className={`text-xl ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              Hear from educators and researchers who have transformed their lab management
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className={`p-8 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-                <div className="mb-6">
-                  <FaQuoteLeft className={`text-3xl ${darkMode ? 'text-blue-400' : 'text-blue-600'} opacity-50`} />
-                </div>
-                <p className={`text-lg leading-relaxed mb-6 italic ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center space-x-3">
-                  <div className={`w-12 h-12 rounded-full ${darkMode ? 'bg-blue-600' : 'bg-blue-100'} flex items-center justify-center`}>
-                    <span className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-blue-600'}`}>
-                      {testimonial.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className={`font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                      {testimonial.name}
-                    </h4>
-                    <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                      {testimonial.role}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
       </div>
     </section>
   );
