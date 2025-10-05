@@ -1,54 +1,128 @@
-import React from 'react';
-import { FaCogs, FaThumbsUp, FaFlask, FaLaptop, FaQuoteLeft, FaClock, FaBuilding, FaIndustry, FaRocket, FaLightbulb, FaSeedling, FaCubes, FaUsers, FaAward } from 'react-icons/fa';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import {
+  FaCogs, FaFlask, FaLaptop, FaClock,
+  FaBuilding, FaIndustry, FaRocket,
+  FaLightbulb, FaSeedling, FaCubes,
+  FaUsers, FaAward
+} from 'react-icons/fa';
+// Assuming logo is imported here, e.g.:
+import logo from '../assets/imgs/logo.png'; // Make sure this path is correct for your logo image
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface AboutPageProps {
   darkMode?: boolean;
 }
 
 const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
+  // Refs for section containers
+  const sifRef = useRef<HTMLDivElement>(null);
+  const fabRef = useRef<HTMLDivElement>(null);
+  const platformRef = useRef<HTMLDivElement>(null);
+
+  // Ref for the branch diagram specifically, if you want to animate it separately
+  const branchDiagramRef = useRef<HTMLDivElement>(null);
+
+
+  // Scroll animation for all sections
+useEffect(() => {
+  const sections = [sifRef.current, fabRef.current, platformRef.current];
+
+  sections.forEach((section) => {
+    if (!section) return;
+
+    // Target a broader range of elements including the new diagram components
+    const elements = section.querySelectorAll<HTMLElement>('h2, p, span, div:not(.absolute.z-10, .absolute.top, .absolute.bottom, .svg-container), button, .feature-node-circle, .feature-node-text');
+
+
+    gsap.fromTo(
+      elements,
+      {
+        opacity: 0,
+        y: 40,
+        filter: 'blur(10px)',
+      },
+      {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        ease: 'power3.out',
+        stagger: 0.06,
+        duration: 0.6, // fast reveal speed
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 85%', // trigger slightly before entering
+          toggleActions: 'play none none none', // only play once (no reverse)
+          once: true, // plays only once even if scrolled back
+        },
+      }
+    );
+  });
+
+  // Optional: Animate SVG lines drawing in
+  if (branchDiagramRef.current) {
+    gsap.fromTo(
+      branchDiagramRef.current.querySelectorAll('.branch-line'),
+      {
+        strokeDasharray: (i, target) => target.getTotalLength(),
+        strokeDashoffset: (i, target) => target.getTotalLength(),
+      },
+      {
+        strokeDashoffset: 0,
+        duration: 1,
+        ease: 'power2.out',
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: branchDiagramRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+      }
+    );
+  }
+
+
+  return () => {
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+  };
+}, []);
+
+
+
 
   const services = [
-    { 
-      icon: <FaFlask className="text-4xl" />, 
-      title: 'Lab Slot Booking', 
-      desc: 'Seamless online reservation system for laboratory time slots across all departments and research facilities.' 
+    {
+      icon: <FaFlask className="text-4xl" />,
+      title: 'Lab Slot Booking',
+      desc: 'Seamless online reservation system for laboratory time slots across all departments and research facilities.',
     },
-    { 
-      icon: <FaLaptop className="text-4xl" />, 
-      title: 'Equipment Booking', 
-      desc: 'Advanced booking platform for specialized research equipment with real-time availability tracking.' 
+    {
+      icon: <FaLaptop className="text-4xl" />,
+      title: 'Equipment Booking',
+      desc: 'Advanced booking platform for specialized research equipment with real-time availability tracking.',
     },
-    { 
-      icon: <FaClock className="text-4xl" />, 
-      title: 'Real-time Management', 
-      desc: 'Live monitoring and management of bookings with automated notifications and scheduling conflicts resolution.' 
-    }
-  ];
-
-  const testimonials = [
-    { 
-      name: 'Dr. Priya Sharma', 
-      role: 'Head of Research Department', 
-      quote: 'SIF-FLAB has revolutionized how we manage our laboratory resources. The booking system is intuitive and has eliminated scheduling conflicts entirely.' 
+    {
+      icon: <FaClock className="text-4xl" />,
+      title: 'Real-time Management',
+      desc: 'Live monitoring and management of bookings with automated notifications and scheduling conflicts resolution.',
     },
-    { 
-      name: 'Prof. Rajesh Kumar', 
-      role: 'Chemistry Department', 
-      quote: 'The Fab Lab equipment booking feature has streamlined our research workflow. Students can now easily access specialized instruments when needed.' 
-    }
   ];
 
   return (
-    <section className={`relative min-h-screen transition-all duration-500 ${
-      darkMode 
-        ? 'bg-gradient-to-br from-slate-900 to-slate-800 text-gray-50' 
-        : 'bg-gradient-to-br from-gray-50 to-blue-50 text-gray-900'
-    }`}>
-
+    <section
+      className={`relative min-h-screen transition-all duration-500 ${
+        darkMode
+          ? 'bg-gradient-to-br from-slate-900 to-slate-800 text-gray-50'
+          : 'bg-gradient-to-br from-gray-50 to-blue-50 text-gray-900'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16">
-        
-        {/* About SIF Section */}
-        <div className="mb-20">
+
+        {/* ----------- About SIF Section ----------- */}
+        <div ref={sifRef} className="mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="flex items-center space-x-3 mb-6">
@@ -59,6 +133,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
                   About SIF
                 </h2>
               </div>
+
               <div className={`text-xl leading-relaxed font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'} space-y-4`}>
                 <p>
                   <span className="font-bold text-blue-600">Sona Incubation Foundation (SIF)</span> has been established as a Section 8 company non-profit organization funded by <span className="font-semibold">DST-NIDHI & Facilitating Startup India Seed Fund</span>.
@@ -67,72 +142,103 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
                   SIF acts as a <span className="font-bold text-yellow-600">"One-Stop Shop – Business Incubator"</span> for innovators and start-ups, encouraging and facilitating an entrepreneurial and innovative ecosystem for all stakeholders, including innovators, student community, faculty, and society at large.
                 </p>
               </div>
+
               <div className="flex flex-wrap gap-3">
-                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800'}`}>
-                  DST-NIDHI Funded
-                </span>
-                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-green-600 text-white' : 'bg-green-100 text-green-800'}`}>
-                  Startup India Seed Fund
-                </span>
-                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-yellow-600 text-white' : 'bg-yellow-100 text-yellow-800'}`}>
-                  Section 8 Non-Profit
-                </span>
+                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800'}`}>DST-NIDHI Funded</span>
+                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-green-600 text-white' : 'bg-green-100 text-green-800'}`}>Startup India Seed Fund</span>
+                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-yellow-600 text-white' : 'bg-yellow-100 text-yellow-800'}`}>Section 8 Non-Profit</span>
               </div>
+
               <button className={`inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
-                darkMode 
-                  ? 'bg-blue-600 hover:bg-blue-500 text-white hover:shadow-blue-500/25' 
+                darkMode
+                  ? 'bg-blue-600 hover:bg-blue-500 text-white hover:shadow-blue-500/25'
                   : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-600/25'
               }`}>
                 <FaRocket className="mr-2" />
                 Explore Incubation
               </button>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-                <div className="text-center">
-                  <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                    <FaSeedling className={`text-3xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
-                  </div>
-                  <h3 className={`text-lg font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                    Startup Incubation
-                  </h3>
-                </div>
+
+            {/* NEW DIAGRAM STRUCTURE */}
+            <div ref={branchDiagramRef} className="relative flex justify-center items-center h-[400px] w-full">
+              {/* Central Logo */}
+              <div className="absolute z-10 flex justify-center items-center w-40 h-40">
+                <img src={logo} alt="SIF Logo" className="w-full h-full object-contain" />
               </div>
-              <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-                <div className="text-center">
-                  <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
-                    <FaLightbulb className={`text-3xl ${darkMode ? 'text-white' : 'text-green-600'}`} />
-                  </div>
-                  <h3 className={`text-lg font-bold ${darkMode ? 'text-green-400' : 'text-green-800'}`}>
-                    Innovation Hub
-                  </h3>
+
+              {/* SVG Branch Lines with the requested bends */}
+              <svg
+                className="absolute w-full h-full svg-container"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 400 400"
+              >
+                {/* Top-Left Branch */}
+                <path
+                  d="M200 200 L140 200 L140 80 L70 80" // Starts center, goes left, then up, then left to node
+                  stroke="#3B82F6"
+                  strokeWidth="3" // Reduced strokeWidth to match the sketch more closely
+                  fill="none"
+                  className="branch-line"
+                />
+                {/* Top-Right Branch */}
+                <path
+                  d="M200 200 L260 200 L260 80 L330 80" // Starts center, goes right, then up, then right to node
+                  stroke="#10B981"
+                  strokeWidth="3"
+                  fill="none"
+                  className="branch-line"
+                />
+                {/* Bottom-Left Branch */}
+                <path
+                  d="M200 200 L140 200 L140 320 L70 320" // Starts center, goes left, then down, then left to node
+                  stroke="#FACC15"
+                  strokeWidth="3"
+                  fill="none"
+                  className="branch-line"
+                />
+                {/* Bottom-Right Branch */}
+                <path
+                  d="M200 200 L260 200 L260 320 L330 320" // Starts center, goes right, then down, then right to node
+                  stroke="#A855F7"
+                  strokeWidth="3"
+                  fill="none"
+                  className="branch-line"
+                />
+              </svg>
+
+              {/* Feature Nodes (Circular with Icons and Text) */}
+              <div className="absolute top-[60px] left-[50px] flex flex-col items-center">
+                <div className={`feature-node-circle inline-flex p-4 rounded-full mb-2 ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
+                  <FaSeedling className={`text-3xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
                 </div>
+                <p className={`feature-node-text font-semibold text-sm mt-2 ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>Startup Incubation</p>
               </div>
-              <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-                <div className="text-center">
-                  <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-yellow-600' : 'bg-yellow-100'}`}>
-                    <FaUsers className={`text-3xl ${darkMode ? 'text-white' : 'text-yellow-600'}`} />
-                  </div>
-                  <h3 className={`text-lg font-bold ${darkMode ? 'text-yellow-400' : 'text-yellow-800'}`}>
-                    Community Ecosystem
-                  </h3>
+              <div className="absolute top-[60px] right-[50px] flex flex-col items-center">
+                <div className={`feature-node-circle inline-flex p-4 rounded-full mb-2 ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
+                  <FaLightbulb className={`text-3xl ${darkMode ? 'text-white' : 'text-green-600'}`} />
                 </div>
+                <p className={`feature-node-text font-semibold text-sm mt-2 ${darkMode ? 'text-green-400' : 'text-green-800'}`}>Innovation Hub</p>
               </div>
-              <div className={`p-6 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-                <div className="text-center">
-                  <div className={`inline-flex p-4 rounded-full mb-4 ${darkMode ? 'bg-purple-600' : 'bg-purple-100'}`}>
-                    <FaAward className={`text-3xl ${darkMode ? 'text-white' : 'text-purple-600'}`} />
-                  </div>
-                  <h3 className={`text-lg font-bold ${darkMode ? 'text-purple-400' : 'text-purple-800'}`}>
-                    Government Support
-                  </h3>
+              <div className="absolute bottom-[60px] left-[50px] flex flex-col items-center">
+                <div className={`feature-node-circle inline-flex p-4 rounded-full mb-2 ${darkMode ? 'bg-yellow-600' : 'bg-yellow-100'}`}>
+                  <FaUsers className={`text-3xl ${darkMode ? 'text-white' : 'text-yellow-600'}`} />
                 </div>
+                <p className={`feature-node-text font-semibold text-sm mt-2 ${darkMode ? 'text-yellow-400' : 'text-yellow-800'}`}>Community Ecosystem</p>
+              </div>
+              <div className="absolute bottom-[60px] right-[50px] flex flex-col items-center">
+                <div className={`feature-node-circle inline-flex p-4 rounded-full mb-2 ${darkMode ? 'bg-purple-600' : 'bg-purple-100'}`}>
+                  <FaAward className={`text-3xl ${darkMode ? 'text-white' : 'text-purple-600'}`} />
+                </div>
+                <p className={`feature-node-text font-semibold text-sm mt-2 ${darkMode ? 'text-purple-400' : 'text-purple-800'}`}>Government Support</p>
               </div>
             </div>
+            {/* END NEW DIAGRAM STRUCTURE */}
+
           </div>
         </div>
 
-        {/* About Fab Lab Section */}
+        {/* ----------- About Fab Lab Section ----------- */}
+        <div ref={fabRef} className="mb-20">
         <div className="mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className={`relative p-8 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 order-2 lg:order-1`}>
@@ -198,8 +304,8 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
                 </div>
               </div>
               <button className={`inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
-                darkMode 
-                  ? 'bg-purple-600 hover:bg-purple-500 text-white hover:shadow-purple-500/25' 
+                darkMode
+                  ? 'bg-purple-600 hover:bg-purple-500 text-white hover:shadow-purple-500/25'
                   : 'bg-purple-600 hover:bg-purple-700 text-white hover:shadow-purple-600/25'
               }`}>
                 <FaCubes className="mr-2" />
@@ -208,8 +314,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
             </div>
           </div>
         </div>
+        </div>
 
-        {/* Services Section */}
+        {/* ----------- Platform Features Section ----------- */}
+        <div ref={platformRef} className="mb-20">
         <div className="mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="grid grid-cols-1 gap-6">
@@ -244,7 +352,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
                 </h2>
               </div>
               <p className={`text-xl leading-relaxed font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                SIF-FLAB provides comprehensive laboratory management solutions with intelligent scheduling, 
+                SIF-FLAB provides comprehensive laboratory management solutions with intelligent scheduling,
                 real-time availability tracking, and seamless integration with academic workflows.
               </p>
               <div className="space-y-4">
@@ -262,8 +370,8 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
                 </div>
               </div>
               <button className={`inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
-                darkMode 
-                  ? 'bg-blue-600 hover:bg-blue-500 text-white hover:shadow-blue-500/25' 
+                darkMode
+                  ? 'bg-blue-600 hover:bg-blue-500 text-white hover:shadow-blue-500/25'
                   : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-600/25'
               }`}>
                 Get Started
@@ -271,50 +379,6 @@ const AboutPage: React.FC<AboutPageProps> = ({ darkMode = false }) => {
             </div>
           </div>
         </div>
-
-        {/* Testimonials Section */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className={`p-3 rounded-xl ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                <FaThumbsUp className={`text-2xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
-              </div>
-              <h2 className={`text-4xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                Success Stories
-              </h2>
-            </div>
-            <p className={`text-xl ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              Hear from educators and researchers who have transformed their lab management
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className={`p-8 rounded-2xl ${darkMode ? 'bg-slate-800/50' : 'bg-white/80'} backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2`}>
-                <div className="mb-6">
-                  <FaQuoteLeft className={`text-3xl ${darkMode ? 'text-blue-400' : 'text-blue-600'} opacity-50`} />
-                </div>
-                <p className={`text-lg leading-relaxed mb-6 italic ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center space-x-3">
-                  <div className={`w-12 h-12 rounded-full ${darkMode ? 'bg-blue-600' : 'bg-blue-100'} flex items-center justify-center`}>
-                    <span className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-blue-600'}`}>
-                      {testimonial.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className={`font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                      {testimonial.name}
-                    </h4>
-                    <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                      {testimonial.role}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
 
       </div>
