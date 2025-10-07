@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import SplitText from '../components/SplitText/SplitText';
+import HeroImg from "../assets/imgs/SonaMainBuilding.svg"; 
 
 interface HeroSectionProps {
   darkMode?: boolean;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false }) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   return (
-    <section className={`relative min-h-screen font-inter overflow-hidden transition-all duration-300 ${
-      darkMode 
-        ? 'bg-gradient-to-br from-slate-900 to-slate-800 text-gray-50' 
-        : 'bg-gradient-to-br from-slate-50 to-slate-200 text-gray-900'
-    }`}>
+    <section 
+      className={`relative min-h-screen font-inter overflow-hidden transition-all duration-300 ${
+        darkMode ? 'text-gray-50' : 'text-gray-900'
+      }`}
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, ${darkMode ? '0.7' : '0.5'}), rgba(0, 0, 0, ${darkMode ? '0.7' : '0.5'})), url(${HeroImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       {/* Modern Abstract Background */}
       <div className="absolute inset-0 pointer-events-none z-5 overflow-hidden">
         
@@ -168,84 +166,70 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false }) => {
         ))}
       </div>
 
-      {/* Interactive Cursor */}
-      <div
-        className="fixed w-12 h-12 rounded-full pointer-events-none z-20 opacity-30 transition-transform duration-100 ease-out"
-        style={{
-          left: mousePosition.x - 25,
-          top: mousePosition.y - 25,
-          background: darkMode 
-            ? 'radial-gradient(circle, #FDE047 0%, transparent 70%)'
-            : 'radial-gradient(circle, #FCD34D 0%, transparent 70%)',
-        }}
-      />
+
 
       {/* Main Hero Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 max-w-6xl mx-auto px-4 lg:px-8 py-20 lg:py-32 items-center relative z-20 mt-16">{/* Added mt-16 for navbar space */}
-        {/* Left Content */}
-        <div className="flex flex-col space-y-6 lg:space-y-8 text-center lg:text-left">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight space-y-2">
-            <div className="block">
-              <SplitText 
-                text="Seamless Lab" 
-                className="inline-block mr-3"
-                delay={200}
-              />
-              <SplitText 
-                text="Slot Booking" 
-                className={`inline-block ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}
-                delay={800}
-              />
-            </div>
-            <div className="block mt-2">
-              <SplitText 
-                text="Made" 
-                className="inline-block mr-3"
-                delay={1400}
-              />
-              <SplitText 
-                text="Simple" 
-                className={`inline-block ${darkMode ? 'text-yellow-300' : 'text-yellow-500'} drop-shadow-lg`}
-                delay={1800}
-              />
-            </div>
-          </h1>
-
-          <p className={`text-lg lg:text-xl leading-relaxed animate-slide-in-left-delay ${
-            darkMode ? 'text-gray-300' : 'text-gray-600'
+      <div className="flex items-center justify-center min-h-screen px-4 lg:px-8 relative z-20">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Glassmorphism Card Container */}
+          <div className={`backdrop-blur-xl rounded-3xl p-8 lg:p-12 shadow-2xl border transition-all duration-300 ${
+            darkMode 
+              ? 'bg-white/5 border-white/20 shadow-black/30' 
+              : 'bg-white/5 border-white/30 shadow-black/20'
           }`}>
-            Experience seamless laboratory scheduling with our advanced booking system. 
-            Manage your research time efficiently and never miss an important experiment.
-          </p>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight space-y-2 drop-shadow-lg mb-6">
+              <div className="block">
+                <SplitText 
+                  text="Seamless Lab" 
+                  className="inline-block mr-3 text-white"
+                  delay={200}
+                />
+                <SplitText 
+                  text="Slot Booking" 
+                  className={`inline-block ${darkMode ? 'text-blue-300' : 'text-blue-400'} drop-shadow-lg`}
+                  delay={800}
+                />
+              </div>
+              <div className="block mt-2">
+                <SplitText 
+                  text="Made" 
+                  className="inline-block mr-3 text-white"
+                  delay={1400}
+                />
+                <SplitText 
+                  text="Simple" 
+                  className={`inline-block ${darkMode ? 'text-yellow-300' : 'text-yellow-400'} drop-shadow-lg`}
+                  delay={1800}
+                />
+              </div>
+            </h1>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up">
-            <button className={`flex items-center justify-center gap-2 px-6 lg:px-8 py-3 lg:py-4 rounded-xl font-semibold text-base lg:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-xl hover:shadow-2xl min-w-[140px] whitespace-nowrap ${
-              darkMode 
-                ? 'bg-blue-600 hover:bg-blue-500 text-white hover:shadow-blue-500/40' 
-                : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-600/40'
+            <p className={`text-lg lg:text-xl leading-relaxed animate-slide-in-left-delay drop-shadow-md mb-8 max-w-2xl mx-auto ${
+              darkMode ? 'text-gray-200' : 'text-gray-100'
             }`}>
-              <span className="material-icons text-sm">visibility</span>
-              View More
-            </button>
+              Experience seamless laboratory scheduling with our advanced booking system. 
+              Manage your research time efficiently and never miss an important experiment.
+            </p>
 
-            <button className={`flex items-center justify-center gap-2 px-6 lg:px-8 py-3 lg:py-4 rounded-xl font-semibold text-base lg:text-lg border-2 transition-all duration-300 transform hover:-translate-y-1 min-w-[140px] whitespace-nowrap ${
-              darkMode 
-                ? 'border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-slate-900' 
-                : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
-            }`}>
-              <span className="material-icons text-sm">explore</span>
-              Explore Us
-            </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up">
+              <button className={`flex items-center justify-center gap-2 px-6 lg:px-8 py-3 lg:py-4 rounded-xl font-semibold text-base lg:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-xl hover:shadow-2xl min-w-[140px] whitespace-nowrap ${
+                darkMode 
+                  ? 'bg-blue-600 hover:bg-blue-500 text-white hover:shadow-blue-500/40' 
+                  : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-600/40'
+              }`}>
+                View More
+              </button>
+
+              <button className={`flex items-center justify-center gap-2 px-6 lg:px-8 py-3 lg:py-4 rounded-xl font-semibold text-base lg:text-lg border-2 transition-all duration-300 transform hover:-translate-y-1 min-w-[140px] whitespace-nowrap ${
+                darkMode 
+                  ? 'border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-slate-900' 
+                  : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+              }`}>
+                Explore Us
+              </button>
+            </div>
           </div>
-        </div>
-
-        {/* Right Content - Inserted Image */}
-        <div className="flex justify-center items-center animate-slide-in-right">
-          <img 
-            src="/src/assets/imgs/SonaMainBuilding.svg" 
-            alt="Main Building" 
-            className="rounded-3xl shadow-2xl w-full max-w-2xl h-auto object-cover transform hover:scale-105 transition-transform duration-300"
-          />
         </div>
       </div>
 
