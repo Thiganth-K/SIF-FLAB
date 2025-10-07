@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaSun, FaMoon, FaHome, FaInfoCircle, FaFlask, FaCog, FaEnvelope, FaBars, FaTimes } from 'react-icons/fa';
+import { FaSun, FaMoon, FaHome, FaInfoCircle, FaFlask, FaCog, FaEnvelope, FaBars, FaTimes, FaUsers, FaQuestionCircle } from 'react-icons/fa';
 
 interface NavbarProps {
   darkMode?: boolean;
@@ -12,8 +12,11 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode = false, onToggleDarkMode }) =
   const navItems = [
     { name: 'Home', href: '#home', icon: <FaHome className="text-sm" /> },
     { name: 'About', href: '#about', icon: <FaInfoCircle className="text-sm" /> },
+    { name: 'Services', href: '#services', icon: <FaCog className="text-sm" /> },
     { name: 'Lab Booking', href: '#lab-booking', icon: <FaFlask className="text-sm" /> },
-    { name: 'Equipment', href: '#equipment', icon: <FaCog className="text-sm" /> },
+    { name: 'Equipment', href: '#equipment-booking', icon: <FaCog className="text-sm" /> },
+    { name: 'Team', href: '#team', icon: <FaUsers className="text-sm" /> },
+    { name: 'FAQ', href: '#faq', icon: <FaQuestionCircle className="text-sm" /> },
     { name: 'Contact', href: '#contact', icon: <FaEnvelope className="text-sm" /> },
   ];
 

@@ -66,8 +66,8 @@ useEffect(() => {
     gsap.fromTo(
       branchDiagramRef.current.querySelectorAll('.branch-line'),
       {
-        strokeDasharray: (i, target) => target.getTotalLength(),
-        strokeDashoffset: (i, target) => target.getTotalLength(),
+        strokeDasharray: (_i, target) => target.getTotalLength(),
+        strokeDashoffset: (_i, target) => target.getTotalLength(),
       },
       {
         strokeDashoffset: 0,
