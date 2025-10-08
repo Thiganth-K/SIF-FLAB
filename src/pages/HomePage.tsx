@@ -1,6 +1,6 @@
 import React from 'react'
 import HeroSection from '../sections/HeroSection'
-import AboutSection from '../sections/AboutPage'
+import AboutSection from '../sections/AboutSection'
 import ServicesSection from '../sections/ServicesSection'
 import BookingSection from '../sections/BookingSection'
 import FAQSection from '../sections/FAQSection'
