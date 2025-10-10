@@ -3,12 +3,9 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   FaCogs, FaFlask, FaLaptop, FaClock,
-  FaBuilding, FaIndustry, FaRocket,
-  FaLightbulb, FaSeedling, FaCubes,
-  FaUsers, FaAward
+  FaIndustry, FaCubes
 } from 'react-icons/fa';
-// Assuming logo is imported here, e.g.:
-import logo from '../assets/imgs/logo.png'; // Make sure this path is correct for your logo image
+// Assuming logo is imported here, e.g.: // Make sure this path is correct for your logo image
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,123 +117,6 @@ useEffect(() => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-16">
-
-        {/* ----------- About SIF Section ----------- */}
-        <div ref={sifRef} className="mb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className={`p-3 rounded-xl ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                  <FaBuilding className={`text-2xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
-                </div>
-                <h2 className={`text-4xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>
-                  About SIF
-                </h2>
-              </div>
-
-              <div className={`text-xl leading-relaxed font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'} space-y-4`}>
-                <p>
-                  <span className="font-bold text-blue-600">Sona Incubation Foundation (SIF)</span> has been established as a Section 8 company non-profit organization funded by <span className="font-semibold">DST-NIDHI & Facilitating Startup India Seed Fund</span>.
-                </p>
-                <p>
-                  SIF acts as a <span className="font-bold text-yellow-600">"One-Stop Shop – Business Incubator"</span> for innovators and start-ups, encouraging and facilitating an entrepreneurial and innovative ecosystem for all stakeholders, including innovators, student community, faculty, and society at large.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-800'}`}>DST-NIDHI Funded</span>
-                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-green-600 text-white' : 'bg-green-100 text-green-800'}`}>Startup India Seed Fund</span>
-                <span className={`px-4 py-2 rounded-full text-sm font-semibold ${darkMode ? 'bg-yellow-600 text-white' : 'bg-yellow-100 text-yellow-800'}`}>Section 8 Non-Profit</span>
-              </div>
-
-              <button className={`inline-flex items-center px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
-                darkMode
-                  ? 'bg-blue-600 hover:bg-blue-500 text-white hover:shadow-blue-500/25'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-blue-600/25'
-              }`}>
-                <FaRocket className="mr-2" />
-                Explore Incubation
-              </button>
-            </div>
-
-            {/* NEW DIAGRAM STRUCTURE */}
-            <div ref={branchDiagramRef} className="relative flex justify-center items-center h-[400px] w-full">
-              {/* Central Logo */}
-              <div className="absolute z-10 flex justify-center items-center w-40 h-40">
-                <img src={logo} alt="SIF Logo" className="w-full h-full object-contain" />
-              </div>
-
-              {/* SVG Branch Lines with the requested bends */}
-              <svg
-                className="absolute w-full h-full svg-container"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 400 400"
-              >
-                {/* Top-Left Branch */}
-                <path
-                  d="M200 200 L140 200 L140 80 L70 80" // Starts center, goes left, then up, then left to node
-                  stroke="#3B82F6"
-                  strokeWidth="3" // Reduced strokeWidth to match the sketch more closely
-                  fill="none"
-                  className="branch-line"
-                />
-                {/* Top-Right Branch */}
-                <path
-                  d="M200 200 L260 200 L260 80 L330 80" // Starts center, goes right, then up, then right to node
-                  stroke="#10B981"
-                  strokeWidth="3"
-                  fill="none"
-                  className="branch-line"
-                />
-                {/* Bottom-Left Branch */}
-                <path
-                  d="M200 200 L140 200 L140 320 L70 320" // Starts center, goes left, then down, then left to node
-                  stroke="#FACC15"
-                  strokeWidth="3"
-                  fill="none"
-                  className="branch-line"
-                />
-                {/* Bottom-Right Branch */}
-                <path
-                  d="M200 200 L260 200 L260 320 L330 320" // Starts center, goes right, then down, then right to node
-                  stroke="#A855F7"
-                  strokeWidth="3"
-                  fill="none"
-                  className="branch-line"
-                />
-              </svg>
-
-              {/* Feature Nodes (Circular with Icons and Text) */}
-              <div className="absolute top-[60px] left-[50px] flex flex-col items-center">
-                <div className={`feature-node-circle inline-flex p-4 rounded-full mb-2 ${darkMode ? 'bg-blue-600' : 'bg-blue-100'}`}>
-                  <FaSeedling className={`text-3xl ${darkMode ? 'text-white' : 'text-blue-600'}`} />
-                </div>
-                <p className={`feature-node-text font-semibold text-sm mt-2 ${darkMode ? 'text-blue-400' : 'text-blue-800'}`}>Startup Incubation</p>
-              </div>
-              <div className="absolute top-[60px] right-[50px] flex flex-col items-center">
-                <div className={`feature-node-circle inline-flex p-4 rounded-full mb-2 ${darkMode ? 'bg-green-600' : 'bg-green-100'}`}>
-                  <FaLightbulb className={`text-3xl ${darkMode ? 'text-white' : 'text-green-600'}`} />
-                </div>
-                <p className={`feature-node-text font-semibold text-sm mt-2 ${darkMode ? 'text-green-400' : 'text-green-800'}`}>Innovation Hub</p>
-              </div>
-              <div className="absolute bottom-[60px] left-[50px] flex flex-col items-center">
-                <div className={`feature-node-circle inline-flex p-4 rounded-full mb-2 ${darkMode ? 'bg-yellow-600' : 'bg-yellow-100'}`}>
-                  <FaUsers className={`text-3xl ${darkMode ? 'text-white' : 'text-yellow-600'}`} />
-                </div>
-                <p className={`feature-node-text font-semibold text-sm mt-2 ${darkMode ? 'text-yellow-400' : 'text-yellow-800'}`}>Community Ecosystem</p>
-              </div>
-              <div className="absolute bottom-[60px] right-[50px] flex flex-col items-center">
-                <div className={`feature-node-circle inline-flex p-4 rounded-full mb-2 ${darkMode ? 'bg-purple-600' : 'bg-purple-100'}`}>
-                  <FaAward className={`text-3xl ${darkMode ? 'text-white' : 'text-purple-600'}`} />
-                </div>
-                <p className={`feature-node-text font-semibold text-sm mt-2 ${darkMode ? 'text-purple-400' : 'text-purple-800'}`}>Government Support</p>
-              </div>
-            </div>
-            {/* END NEW DIAGRAM STRUCTURE */}
-
-          </div>
-        </div>
-
         {/* ----------- About Fab Lab Section ----------- */}
         <div ref={fabRef} className="mb-20">
         <div className="mb-20">

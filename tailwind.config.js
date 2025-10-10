@@ -1,28 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        playfair: ["Playfair Display", "serif"], // optional elegant font
-      },
-    },
-  },
-  plugins: [],
-}
-
-
-/** @type {import('tailwindcss').Config} */
-export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Inter", "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
+        inter: ["Inter", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+        playfair: ["Playfair Display", "serif"],
+      },
+    },
   },
   plugins: [],
 }
