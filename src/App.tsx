@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
+import About from './pages/About';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <main className="pt-16">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </main>
     </BrowserRouter>
