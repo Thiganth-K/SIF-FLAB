@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaFlask } from 'react-icons/fa';
 import AboutBg from '../assets/imgs/about_us_bg.jpg';
@@ -8,8 +7,6 @@ import SpotlightCard from '../components/SpotlightCard';
 // all necessary icons are already imported above
 
 export default function About() {
-  const [dark, setDark] = useState(false);
-
   const sectionFade = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } };
 
   // Sample testimonials data
@@ -69,21 +66,8 @@ export default function About() {
   ];
 
   return (
-    <div className={`${dark ? 'bg-black text-white' : 'bg-white text-black'} min-h-screen transition-colors duration-500`}>
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Theme toggle */}
-        <div className="flex justify-end">
-          <button
-            aria-pressed={dark}
-            onClick={() => setDark((d) => !d)}
-            className={`inline-flex items-center gap-2 px-3 py-2 rounded-full border transition-colors duration-500 ${dark ? 'bg-black text-white border-white' : 'bg-white text-black border-black'}`}
-          >
-            {dark ? 'Dark' : 'Light'}
-          </button>
-        </div>
-
-        {/* Top Banner */}
-        <motion.div
+    <div className="bg-white text-black ">
+      <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -100,6 +84,9 @@ export default function About() {
             </div>
           </header>
         </motion.div>
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        {/* Top Banner */}
+        
 
         {/* Introduction Content */}
         <section className="mt-12">
@@ -129,7 +116,6 @@ export default function About() {
               direction="right"
               speed="slow"
               pauseOnHover={true}
-              className={`${dark ? 'dark' : ''}`}
             />
           </div>
         </section>
@@ -155,16 +141,16 @@ export default function About() {
                 className="cursor-pointer"
               >
                 <SpotlightCard 
-                  className={`h-full ${dark ? 'bg-black border-neutral-800' : 'bg-white border-gray-200'}`}
-                  spotlightColor={dark ? "rgba(15, 23, 42, 0.8)" : "rgba(30, 41, 59, 0.6)"}
+                  className="h-full bg-white border-gray-200"
+                  spotlightColor="rgba(30, 41, 59, 0.6)"
                 >
                   <div className="flex items-center gap-3 relative z-20">
                     <div className="p-3 rounded-md bg-blue-500 text-white">
                       <FaFlask />
                     </div>
                     <div>
-                      <h4 className={`font-bold text-blue-500`}>Feature Card {i}</h4>
-                      <p className={`text-sm mt-1 ${dark ? 'text-gray-300' : 'text-gray-600'}`}>
+                      <h4 className="font-bold text-blue-500">Feature Card {i}</h4>
+                      <p className="text-sm mt-1 text-gray-600">
                         Short description of the platform feature. Lorem ipsum dolor sit.
                       </p>
                     </div>
@@ -186,7 +172,7 @@ export default function About() {
           >
             Our Team
           </motion.h2>
-          <div className={`${dark ? 'bg-black' : 'bg-white'}`}>
+          <div className="bg-white">
             <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
           </div>
         </section>
